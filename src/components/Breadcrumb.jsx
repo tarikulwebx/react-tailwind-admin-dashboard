@@ -5,7 +5,7 @@ import { BreadcrumbContext } from "../contexts";
 const Breadcrumb = () => {
     const {breadcrumbItems} = useContext(BreadcrumbContext);
     return (
-        <nav className="w-full rounded-md px-5 py-6">
+        <nav className="w-full rounded-md px-4 xl:px-5 py-6">
             <ol className="list-reset flex text-gray-400">
                 {breadcrumbItems.map((item, index) => (
                     <li key={index} className="flex items-center">

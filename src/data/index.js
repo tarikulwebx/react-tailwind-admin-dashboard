@@ -1,4 +1,4 @@
-import { ArticleIcon, DashboardIcon, EnvelopeIcon, UserCircleIcon, UsersIcon } from "../assets/icons";
+import { ArticleIcon, CardOutlineIcon, DashboardIcon, EnvelopeIcon, PuzzleOutlineIcon, TableIcon, UserCircleIcon, UsersIcon } from "../assets/icons";
 
 export const navigationItems = [
     {
@@ -6,24 +6,48 @@ export const navigationItems = [
         name: "Dashboard",
         path: "/",
         icon: DashboardIcon,
+        subItems: [],
     },
     {
         id: 2,
         name: "Users",
         path: "/users",
         icon: UsersIcon,
+        subItems: [],
     },
     {
         id: 3,
         name: "Contacts",
         path: "/contacts",
         icon: EnvelopeIcon,
+        subItems: [],
     },
     {
         id: 4,
+        name: "Components",
+        path: "/components",
+        icon: PuzzleOutlineIcon,
+        subItems: [
+            {
+                id: 1,
+                name: "Tables",
+                path: "/components/tables",
+                icon: TableIcon,
+            },
+            {
+                id: 2,
+                name: "Cards",
+                path: "/components/cards",
+                icon: CardOutlineIcon,
+            },
+        ],
+    },
+    {
+        id: 5,
         name: "Contacts",
         path: "/contacts",
         icon: EnvelopeIcon,
+        subItems: [],
     },
 ];
 

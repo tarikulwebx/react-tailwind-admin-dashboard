@@ -3,7 +3,7 @@ import { SidebarContext } from "../contexts";
 import { ArrowDown, ArrowUp, CloseIcon, ColorAdjustIcon, MoonIcon, SettingsIcon, Stack3DIcon, SunIcon } from "../assets/icons";
 import { NavLink } from "react-router-dom";
 import { navigationItems, themeColors } from "../data";
-import { Popover } from "@headlessui/react";
+import { Disclosure, Popover, Transition } from "@headlessui/react";
 
 const Sidebar = () => {
     const { isOpenSidebar, setIsOpenSidebar } = useContext(SidebarContext);
@@ -98,16 +98,73 @@ const Sidebar = () => {
                     </div>
                     <div className="flex-1 overflow-y-auto overflow-x-hidden">
                         <nav className="relative flex flex-col gap-1 px-3 py-5">
-                            {navigationItems.map((item) => (
-                                <NavLink
-                                    to={item.path}
-                                    key={item.id}
-                                    className="flex items-center gap-2.5 rounded-md px-2.5 py-2 text-gray-200 transition-colors duration-200 hover:bg-gray-700 hover:text-white [&.active]:bg-gray-700 "
-                                >
-                                    <item.icon className="text-xl" />{" "}
-                                    {item.name}
-                                </NavLink>
-                            ))}
+                            {navigationItems.map((item) => {
+                                return item.subItems.length === 0 ? (
+                                    <NavLink
+                                        to={item.path}
+                                        key={item.id}
+                                        className="flex items-center gap-2.5 rounded-md px-2.5 py-2 text-gray-200 transition-colors duration-200 hover:bg-gray-700 hover:text-white [&.active]:bg-gray-700 [&.active]:text-white "
+                                    >
+                                        <item.icon className="text-xl" />{" "}
+                                        {item.name}
+                                    </NavLink>
+                                ) : (
+                                    <Disclosure key={item.id}>
+                                        {({ open }) => (
+                                            <>
+                                                <Disclosure.Button as={NavLink} to={item.path}
+                                                    className={`flex items-center justify-between rounded-md px-2.5 py-2 text-gray-200 transition-colors duration-200 hover:bg-gray-700 hover:text-white ${
+                                                        open
+                                                            ? "bg-gray-700"
+                                                            : ""
+                                                    }`}
+                                                >
+                                                    <div className="flex items-center gap-2.5">
+                                                        <item.icon className="text-xl" />{" "}
+                                                        {item.name}
+                                                    </div>
+                                                    {open ? (
+                                                        <ArrowUp className="text-gray-200" />
+                                                    ) : (
+                                                        <ArrowDown className="text-gray-400" />
+                                                    )}
+                                                </Disclosure.Button>
+                                                <Transition
+                                                    enter="transition duration-100 ease-out"
+                                                    enterFrom="transform scale-95 opacity-0"
+                                                    enterTo="transform scale-100 opacity-100"
+                                                    leave="transition duration-75 ease-out"
+                                                    leaveFrom="transform scale-100 opacity-100"
+                                                    leaveTo="transform scale-95 opacity-0"
+                                                >
+                                                    <Disclosure.Panel className=" flex flex-col gap-1 rounded-md bg-gray-700 px-2.5 py-3 text-gray-500 shadow-md">
+                                                        {item.subItems.map(
+                                                            (subItem) => (
+                                                                <NavLink
+                                                                    to={
+                                                                        subItem.path
+                                                                    }
+                                                                    key={
+                                                                        subItem.id
+                                                                    }
+                                                                    className="flex items-center gap-2.5 rounded-md px-2.5 py-2 text-gray-200 transition-colors duration-200 hover:bg-gray-600/40 hover:text-white [&.active]:bg-gray-600/40 [&.active]:text-white "
+                                                                >
+                                                                    {subItem.icon && (
+                                                                        <subItem.icon className="text-xl" />
+                                                                    )}
+                                                                    {
+                                                                        subItem.name
+                                                                    }
+                                                                </NavLink>
+                                                            )
+                                                        )}
+                                                    </Disclosure.Panel>
+                                                </Transition>
+                                            </>
+                                        )}
+                                    </Disclosure>
+                                );
+                            })}
                         </nav>
                     </div>
                     <div className="mt-auto">

@@ -11,7 +11,7 @@ const Navbar = () => {
     const { user } = useContext(LoginUserContext);
     return (
         <div className="fixed left-0 right-0 top-0 flex h-[65px] items-center justify-between bg-white pr-5 shadow backdrop-blur dark:bg-gray-700/50 dark:shadow-white/10 xl:left-[300px]">
-            <div className="flex flex-1 items-center gap-4 pl-2 pr-4">
+            <div className="flex flex-1 items-center gap-4 pl-4 xl:pl-2 pr-4">
                 <button
                     className="text-2xl xl:hidden"
                     onClick={() => setIsOpenSidebar(true)}
