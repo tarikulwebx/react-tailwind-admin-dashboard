@@ -1,8 +1,19 @@
+import { useBreadcrumb } from "../hooks";
 
 const Dashboard = () => {
-    return (
-        <div>Dashboard</div>
-    )
-}
+    const breadcrumbItems = [
+        {
+            label: "Home",
+            path: "/",
+        },
+    ];
+    useBreadcrumb(breadcrumbItems);
 
-export default Dashboard
+    return (
+        <>
+            <div>Dashboard</div>
+        </>
+    );
+};
+
+export default Dashboard;

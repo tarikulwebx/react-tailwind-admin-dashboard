@@ -1,8 +1,19 @@
+import { useBreadcrumb } from "../hooks";
 
 const Users = () => {
-    return (
-        <div>Users</div>
-    )
-}
+    const breadcrumbItems = [
+        {
+            label: "Home",
+            path: "/",
+        },
+        {
+            label: "Users",
+            path: "",
+        }
+    ];
+    useBreadcrumb(breadcrumbItems);
 
-export default Users
+    return <div>Users</div>;
+};
+
+export default Users;

@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import { Navbar, Sidebar } from "../components"
+import { Breadcrumb, Navbar, Sidebar } from "../components"
 
 const RootLayout = () => {
     return (
@@ -9,7 +9,8 @@ const RootLayout = () => {
                 <div className="relative">
                     <Navbar />
                     <div className="h-[65px]"></div>
-                    <div className="p-5">
+                    <Breadcrumb />
+                    <div className="px-5">
                         <Outlet />
                     </div>
                 </div>
